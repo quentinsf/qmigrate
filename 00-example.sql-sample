@@ -1,0 +1,3 @@
+-- An example SQL command.  
+-- You could just uncomment this following line:
+ALTER TABLE customers MODIFY id INT NOT NULL AUTO_INCREMENT;

@@ -1,0 +1,35 @@
+# An example python script to do more complex stuff.
+#
+# This reads a CSV file containing customer names and postcodes, and 
+# inserts the postcode into the database if the entry with the matching
+# customer_name doesn't have one.
+#
+# The args passed to migrate.py are available as 'args'
+#
+
+import csv
+
+# Read a CSV file into a list
+customer_data = []
+with open("customers.csv", "r") as csvfile:
+    reader = csv.DictReader(csvfile, skipinitialspace=True)
+    for row in reader:
+        customer_data.append(dict(row))
+
+# Open a connection to a MySQL database
+import MySQLdb
+db = MySQLdb.connect(host=args.host, user=args.user, port=args.port, passwd=args.password, db=args.database)
+c = db.cursor()
+
+print "Backfilling customer postcodes... "
+for entry in customer_data:
+   
+    # Update empty postcodes based on matching company name and site code
+    if c.execute("UPDATE customers set postcode=%s where not(postcode > '') and customer_name=%s", 
+        (entry['Post Code'], entry['Company Name'])):
+        print "Postcode updated to %s for %s" % (entry['Post Code'], entry['Customer Name'])
+
+c.close()
+db.commit()
+db.close()
+
