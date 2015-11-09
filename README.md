@@ -1,6 +1,6 @@
 # qmigrate
 
-## A very simple ORM-independent migration system
+*A very simple ORM-independent migration system.*
 
 I wrote this when converting a PHP-based project into Python.  I wanted a source-controlled record of the changes I was making to the database in the PHP world, so that when the Python code was ready I could run the same commands on the current database before switching over.  
 
@@ -12,9 +12,9 @@ Here's how it works:
 
 * A table is added to the database, listing which of these files have already been executed. This is called 'migrate' by default, but can be changed with an option.
 
-* When you run the migrations, it will execute any scripts that haven't yet been executed on the database, in order. 
+* When you run `migrate.py`, it will execute any scripts that haven't yet been executed on the database, in order. 
 
-More precisely, when you run `migrate.py`, it will do the following:
+More precisely, it will do the following:
 
      
     Create the 'migrate' table if it doesn't exist
